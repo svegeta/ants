@@ -1,0 +1,16 @@
+AuthType Basic 
+AuthUserFile /var/www/.htpasswd 
+AuthName "Password protected area!" 
+
+Order deny,allow
+Deny from all
+Allow from localhost
+Allow from 127.0.0.1
+require valid-user
+Satisfy Any
+
+<IfModule mod_rewrite.c>
+   RewriteEngine on
+   RewriteRule    ^$ app/webroot/    [L]
+   RewriteRule    (.*) app/webroot/$1 [L]
+</IfModule>
